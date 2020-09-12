@@ -1,7 +1,7 @@
-FROM debian:wheezy
-MAINTAINER Adam Hawkins <hi@ahawkins.me>
+FROM debian:jessie
+MAINTAINER Anton Trunov <mr.avonurt@gmail.com>
 
-ENV THRIFT_VERSION 0.10.0
+ENV THRIFT_VERSION 0.9.3
 
 RUN buildDeps=" \
 		automake \
@@ -21,7 +21,7 @@ RUN buildDeps=" \
 		pkg-config \
 	"; \
 	apt-get update && apt-get install -y --no-install-recommends $buildDeps && rm -rf /var/lib/apt/lists/* \
-	&& curl -sSL "http://apache.mirrors.spacedump.net/thrift/$THRIFT_VERSION/thrift-$THRIFT_VERSION.tar.gz" -o thrift.tar.gz \
+	&& curl -k -sSL "https://archive.apache.org/dist/thrift/$THRIFT_VERSION/thrift-$THRIFT_VERSION.tar.gz" -o thrift.tar.gz \
 	&& mkdir -p /usr/src/thrift \
 	&& tar zxf thrift.tar.gz -C /usr/src/thrift --strip-components=1 \
 	&& rm thrift.tar.gz \
